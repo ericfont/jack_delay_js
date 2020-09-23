@@ -1,11 +1,11 @@
-jack_delay 0.4.2  -  25/08/2018
+jack_delay_js is a JavaScript port of Fons Adriaensen's jack_delay from linuxaudio.org, used for testing latency via the Jack Audio Connection Kit soundserver (JACK), but once ported to javascript can be used for testing browser (or electron or nodejs) audio latency.
+
+README from original jack_delay author Fons Adriaensen:
+
 -------------------------------
 
-Maintenance release.
-
-
+jack_delay 0.4.2  -  25/08/2018 Maintenance release.
 jack_delay 0.4.0  -  18/04/2011
--------------------------------
 
 Jack_delay can be used to measure the round-trip latency of a soundcard.
 To do this, start the program and connect like this:
@@ -28,33 +28,5 @@ this interval to 4096 * 16 samples, more than a second at 48 kHz.
 This release should be much less sensitive to frequency-dependent delay
 than the previous ones. 
 
-The following options are avaiable (use jack_delay -h to see them):
-
--O playback port   connect output to named port.
--I capture port    connect input to named port.
--E                 show excess latency instead of full latency.
-
-Using -E requires -O and -I, as the the computation depends on
-the latency values reported by jack for the ports used.
-The excess latency is the measured value minus the expected one,
-taking into account any corrections set by jack's -I and -O options.
-That is, if you have the right values for these options, then the
-value displayed with -E will be at most +/- half a sample.
-
-To determine the correct values for jack's -I and -O, set both
-of them to zero ('default' in qjackctl) and measure the latency
-using the -E option. Then set each of the -I and -O options to
-half the value displayed.
-
--- 
-FA
-
-
-
-
-
-
-
-
-
-
+--
+FA's original project:  https://wiki.linuxaudio.org/apps/all/jack_delay
