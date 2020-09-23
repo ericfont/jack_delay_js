@@ -23,6 +23,7 @@
 
 
 #include <unistd.h>
+#include <emscripten/bind.h>
 
 
 class Freq
@@ -48,9 +49,9 @@ public:
     int process (size_t len, float *inp, float *out);
     int resolve (void);
     void invert (void) { _inv ^= 1; }
-    int    inv (void) { return _inv; }
-    double del (void) { return _del; }
-    double err (void) { return _err; }
+    int    inv (void) const { return _inv; }
+    double del (void) const { return _del; }
+    double err (void) const { return _err; }
 
 private:
 
@@ -62,6 +63,18 @@ private:
     Freq    _freq [13];
 };
 
+// Binding code
+EMSCRIPTEN_BINDINGS(MTDM) {
+  emscripten::class_<MTDM>("MTDM")
+    .constructor<int>()
+    //more difficult .function("process", &MTDM::process)
+    .function("resolve", &MTDM::resolve)
+    .function("invert", &MTDM::invert)
+    .property("inv", &MTDM::inv)
+    .property("del", &MTDM::del)
+    .property("err", &MTDM::err)
+    ;
+}
 
 #endif
 

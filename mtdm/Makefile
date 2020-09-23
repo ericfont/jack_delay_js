@@ -19,7 +19,7 @@
 # -----------------------------------------------------------------------------
 
 mtdm:
-	emcc mtdm.cc -o mtdm.js
+	emcc  --bind -o mtdm.js mtdm.cc
 
 clean:
 	rm -f mtdm.js mtdm.wasm
