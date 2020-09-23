@@ -1,5 +1,6 @@
 # -----------------------------------------------------------------------------
 #
+#  Copyright (C) 2020 Eric Fontaine <eric@ericfontainejazz.com>
 #  Copyright (C) 2012-2018 Fons Adriaensen <fons@linuxaudio.org>
 #
 #  This program is free software; you can redistribute it and/or modify
@@ -17,34 +18,9 @@
 #
 # -----------------------------------------------------------------------------
 
-
-PREFIX ?= /usr/local
-BINDIR ?= $(PREFIX)/bin
-
-VERSION = 0.4.2
-CPPFLAGS += -MMD -MP -DVERSION=\"$(VERSION)\"
-CXXFLAGS += -O2 -Wall
-CXXFLAGS += -march=native
-LDLIBS += -ljack -lasound -lrt
-
-
-all:	jack_delay
-
-
-JACK_DELAY_O =	jack_delay.o mtdm.o
-jack_delay:	$(JACK_DELAY_O)
-	$(CXX) $(LDFLAGS) -o $@ $(JACK_DELAY_O) $(LDLIBS)
-
-
-install:	jack_delay
-	install -d $(DESTDIR)$(BINDIR)
-	install -m 755 jack_delay $(DESTDIR)$(BINDIR)
-
-
-uninstall:
-	rm -f $(DESTDIR)$(BINDIR)/jack_delay
-
+mtdm:
+	emcc mtdm.cc -o mtdm.js
 
 clean:
-	/bin/rm -f *~ *.o *.a *.d *.so jack_delay
+	rm -f mtdm.js mtdm.wasm
 
